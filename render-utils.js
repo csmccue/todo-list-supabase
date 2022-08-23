@@ -1,4 +1,4 @@
-export function renderTodo(todos) {
+export function renderTodo(todos, todoHandler) {
         // create a div and a p tag
     const div = document.createElement('div');
     // const p = document.createElement('p');
@@ -11,6 +11,37 @@ export function renderTodo(todos) {
         li.classList.add('todo-item');
             // put the todo's text into the p tag
         li.textContent = thing.todo;
+        console.log(thing.complete);
+        if (thing.complete === false) {
+            li.addEventListener('click', async () =>{
+                // console.log(thing);
+                li.classList.add('completed');    
+                todoHandler(thing.id);
+                // thing.complete = true;
+                // console.log('you clicked the item!');
+                // console.log(thing.complete);
+                // console.log(thing);
+    
+            });
+        } else {
+            li.classList.add('completed');    
+        }
+
+
+
+        // if (thing.complete) {
+        //     li.classList.add('incomplete');
+        // } else {
+        //     li.classList.add('completed');
+        //     li.addEventListener('click', async () =>{
+        //         thing.complete = true;
+        //         console.log('you clicked the item!');
+        //         console.log(thing.complete);
+        //         console.log(thing);
+        //         li.classList.add('slash');        
+        //     });
+        // }
+
             // append stuff
         div.append(li);
     }

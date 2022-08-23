@@ -21,7 +21,7 @@ todoForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     // create todo
     const formData = new FormData(todoForm);
-    const response = await createTodo({
+    await createTodo({
         // const todo = response.data;
         todo: formData.get('todo'),
     });
@@ -29,7 +29,7 @@ todoForm.addEventListener('submit', async (e) => {
     // console.log(todos);
 
     // reset the form
-    formData.reset();
+    todoForm.reset();
     // display the todos
     displayTodos();
 });
@@ -41,6 +41,10 @@ todoForm.addEventListener('submit', async (e) => {
     // swap out todo in array
     // call displayTodos
 
+async function todoHandler(todo) {
+    await completeTodo(todo);
+    displayTodos();
+}
    
 
 async function displayTodos() {
@@ -48,8 +52,8 @@ async function displayTodos() {
     todosEl.innerHTML = '';
     // display the list of todos, 
     const grabTodos = await getTodos();
-    console.log(grabTodos);
-    const list = renderTodo(grabTodos);
+    // console.log(grabTodos);
+    const list = renderTodo(grabTodos, todoHandler);
     todosEl.append(list);
           // call render function, pass in state and complete handler function!
           // append to .todos
@@ -62,9 +66,9 @@ logoutButton.addEventListener('click', () => {
 
 deleteButton.addEventListener('click', async () => {
     // delete all todos
-    console.log('clicked delete');
+    // console.log('clicked delete');
     await deleteAllTodos();
-    console.log('post delete all todos');
+    // console.log('post delete all todos');
     // modify state to match
     // todos = [];
     // re displayTodos

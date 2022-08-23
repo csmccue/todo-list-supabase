@@ -133,6 +133,9 @@ footer {
     font-size: 2em;
 }
 
-#slash {
+.completed {
     text-decoration: line-through;
+}
+.incomplete {
+    text-decoration: underline;
 }
