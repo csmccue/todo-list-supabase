@@ -5,7 +5,7 @@ export function renderTodo(todos) {
     // depending on whether the todo is complete, give the div the appropriate css class ('complete' or 'incomplete')
     // add the 'todo' css class no matter what
     div.classList.add('todo');
-    console.log(todos);
+    // console.log(todos);
     for (let thing of todos) {
         const li = document.createElement('li');
         li.classList.add('todo-item');

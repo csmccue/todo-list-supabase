@@ -15,20 +15,23 @@ const todoForm = document.querySelector('.todo-form');
 const logoutButton = document.querySelector('#logout');
 const deleteButton = document.querySelector('.delete-button');
 
-let todos = [];
+// let todos = [];
 
 todoForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    // create todo
     const formData = new FormData(todoForm);
     const response = await createTodo({
         // const todo = response.data;
         todo: formData.get('todo'),
     });
-    console.log('any message', response);
-    // todos.push(todo);
-    displayTodos();
-    // on submit, create a todo, reset the form, and display the todos
+    // todos.push(response.todo);
+    // console.log(todos);
+
+    // reset the form
     formData.reset();
+    // display the todos
+    displayTodos();
 });
 
 // create todo state
@@ -45,6 +48,7 @@ async function displayTodos() {
     todosEl.innerHTML = '';
     // display the list of todos, 
     const grabTodos = await getTodos();
+    console.log(grabTodos);
     const list = renderTodo(grabTodos);
     todosEl.append(list);
           // call render function, pass in state and complete handler function!
@@ -58,8 +62,13 @@ logoutButton.addEventListener('click', () => {
 
 deleteButton.addEventListener('click', async () => {
     // delete all todos
+    console.log('clicked delete');
+    await deleteAllTodos();
+    console.log('post delete all todos');
     // modify state to match
+    // todos = [];
     // re displayTodos
+    displayTodos();
 });
 
 
@@ -71,7 +80,6 @@ async function loadPage() {
     if (response.error) {
         console.log(response.error.message);
     } else {
-        todos = response.data;
         displayTodos();
     }
 }

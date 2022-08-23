@@ -12,7 +12,7 @@ export async function createTodo(todo) {
 
 export async function deleteAllTodos() {
     // delete all todos for this user in supabase
-    const response = client.from('todos').delete();
+    const response = await client.from('todos').delete().match({ user_id: client.auth.user().id });
     return checkError(response);
 }
 
@@ -21,7 +21,6 @@ export async function getTodos() {
     const response = await client.from('todos').select('*');
     return checkError(response);
 }
-// console.log(getTodos());
 
 export async function completeTodo(id) {
     // find the and update (set complete to true), the todo that matches the correct id
