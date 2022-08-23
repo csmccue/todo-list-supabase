@@ -125,3 +125,14 @@ footer {
 .auth-container button {
     margin: 10px;
 }
+
+.todo {
+    font-size: 2em;
+}
+.todo-item {
+    font-size: 2em;
+}
+
+#slash {
+    text-decoration: line-through;
+}
